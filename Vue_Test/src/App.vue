@@ -1,47 +1,50 @@
 <script setup>
-import HelloWorld from './components/HelloWorld.vue'
-import TheWelcome from './components/TheWelcome.vue'
+import { ref } from 'vue';
+const confident = ref(true)
+function checkInput() {
+  var empt1 = document.getElementById('userName') // [el1, el2]
+  var empt2 = document.getElementById('passWord')
+  if (empt1.value === '' || empt2.value === '') {
+    confident.value = false
+  } else {
+    confident.value = true
+    alert('Nhập thông tin thành công')
+  }
+}
+
+
+
 </script>
 
 <template>
-  <header>
-    <img alt="Vue logo" class="logo" src="./assets/logo.svg" width="125" height="125" />
-
-    <div class="wrapper">
-      <HelloWorld msg="You did it!" />
+  <div class="login-container">
+    <div class="user-name">
+      <span class="login-title">Tài khoản</span>
+      <input type="text" class="input" id="userName">
     </div>
-  </header>
 
-  <main>
-    <TheWelcome />
-  </main>
+    <div class="user-name">
+      <span class="login-title">mật khẩu</span>
+      <input type="password" class="input" id="passWord">
+    </div>
+  </div>
+
+  <span :class="{ ishidden: confident }">Vui lòng nhập đầy đủ thông tin</span>
+
+  <button @click="checkInput">Submit</button>
 </template>
 
 <style scoped>
-header {
-  line-height: 1.5;
+.login-container {
+  display: flex;
+  flex-direction: column;
 }
 
-.logo {
-  display: block;
-  margin: 0 auto 2rem;
+.user-name {
+  padding: 20px 0;
 }
 
-@media (min-width: 1024px) {
-  header {
-    display: flex;
-    place-items: center;
-    padding-right: calc(var(--section-gap) / 2);
-  }
-
-  .logo {
-    margin: 0 2rem 0 0;
-  }
-
-  header .wrapper {
-    display: flex;
-    place-items: flex-start;
-    flex-wrap: wrap;
-  }
+.ishidden {
+  display: none;
 }
 </style>
